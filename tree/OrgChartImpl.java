@@ -7,12 +7,14 @@ public class OrgChartImpl implements OrgChart {
 
 	// Employee is your generic 'E'..
 	private List<GenericTreeNode<Employee>> nodes = new ArrayList<>();
-	private GenericTreeNode<Employee> root;
+	private GenericTreeNode<Employee> root = null;
 
 	@Override
 	public void addRoot(Employee e) {
-		root = new GenericTreeNode<Employee>(e);
-		nodes.add(root);
+		if(root== null) {
+			GenericTreeNode<Employee> root = new GenericTreeNode<Employee>(e);
+			nodes.add(root);
+		}
 	}
 
 	@Override
@@ -25,6 +27,14 @@ public class OrgChartImpl implements OrgChart {
 	@Override
 	public void addDirectReport(Employee manager, Employee newPerson) {
 		// TODO Auto-generated method stub
+		for(int i = 0; i< nodes.size(); i++) {
+			GenericTreeNode<Employee> currentEmployee = nodes.get(i);
+			if(currentEmployee.data.equals(manager)) {
+				GenericTreeNode<Employee> newNode = new GenericTreeNode<>(newPerson);
+				currentEmployee.addChild(newNode);
+				nodes.add(newNode);
+			}
+		}
 
 	}
 
