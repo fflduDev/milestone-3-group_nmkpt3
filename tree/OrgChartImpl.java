@@ -1,7 +1,11 @@
 package tree;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Set;
 
 public class OrgChartImpl implements OrgChart {
 
@@ -30,9 +34,10 @@ public class OrgChartImpl implements OrgChart {
 		for(int i = 0; i< nodes.size(); i++) {
 			GenericTreeNode<Employee> currentEmployee = nodes.get(i);
 			if(currentEmployee.data.equals(manager)) {
-				GenericTreeNode<Employee> newNode = new GenericTreeNode<>(newPerson);
+				GenericTreeNode<Employee> newNode = new GenericTreeNode<Employee>(newPerson);
 				currentEmployee.addChild(newNode);
 				nodes.add(newNode);
+				break;
 			}
 		}
 
@@ -50,9 +55,31 @@ public class OrgChartImpl implements OrgChart {
 
 	}
 
+	
 	@Override
 	public void showOrgChartBreadthFirst() {
-		// TODO Auto-generated method stub
+		if(root == null) {
+			return;
+		}
+		
+		Queue<GenericTreeNode> q = new LinkedList<>();
+		q.add(root);
+		
+		for(int i = 0; i < nodes.size(); i++) {
+			while (!q.isEmpty()) {
+				int n = q.size();
+
+				// If this node has children
+				while (n > 0) {
+					// Dequeue an item from queue and print it
+					TreeNode p = q.peek();
+					q.remove();
+					System.out.print(p.key + " ");
+				}
+			}
+		}
+            
+        
 
 	}
 
