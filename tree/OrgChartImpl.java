@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
+import java.util.Vector;
 
 public class OrgChartImpl implements OrgChart {
 
@@ -44,6 +46,13 @@ public class OrgChartImpl implements OrgChart {
 	@Override
 	public void removeEmployee(Employee firedPerson) {
 		// TODO Auto-generated method stub
+		for (int i = 0; i < nodes.size(); i++) {
+			GenericTreeNode<Employee> currentEmployee = nodes.get(i);
+			if (currentEmployee.data.equals(firedPerson)) {
+				currentEmployee.removeChild(firedPerson);
+				break;
+			}
+		}
 
 	}
 
