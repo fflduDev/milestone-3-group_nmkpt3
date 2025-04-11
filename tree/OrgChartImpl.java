@@ -16,7 +16,8 @@ public class OrgChartImpl implements OrgChart {
 	@Override
 	public void addRoot(Employee e) {
 		if (root == null) {
-			GenericTreeNode<Employee> root = new GenericTreeNode<Employee>(e);
+			root = new GenericTreeNode<Employee>(e);
+			//GenericTreeNode<Employee> root = new GenericTreeNode<Employee>(e);
 			nodes.add(root);
 		}
 	}
