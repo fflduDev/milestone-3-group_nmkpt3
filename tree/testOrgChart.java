@@ -35,6 +35,7 @@ public class testOrgChart {
 		company.showOrgChartDepthFirst();
 		
 		// show breadth first
+		System.out.println("Testing adding: ");
 		company.showOrgChartBreadthFirst();
 		
 		// and remove some people
@@ -45,6 +46,7 @@ public class testOrgChart {
 		company.showOrgChartDepthFirst();
 		
 		// show breadth first
+		System.out.println("Testing Removing: ");
 		company.showOrgChartBreadthFirst();
 		
 		
