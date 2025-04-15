@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
-import java.util.Vector;
 
 public class OrgChartImpl implements OrgChart {
 
@@ -17,7 +16,7 @@ public class OrgChartImpl implements OrgChart {
 	public void addRoot(Employee e) {
 		if (root == null) {
 			root = new GenericTreeNode<Employee>(e);
-			//GenericTreeNode<Employee> root = new GenericTreeNode<Employee>(e);
+			// GenericTreeNode<Employee> root = new GenericTreeNode<Employee>(e);
 			nodes.add(root);
 		}
 	}
@@ -46,21 +45,45 @@ public class OrgChartImpl implements OrgChart {
 
 	@Override
 	public void removeEmployee(Employee firedPerson) {
-		// TODO Auto-generated method stub
 		for (GenericTreeNode<Employee> currentEmployee : nodes) {
-			
-			for (GenericTreeNode<Employee> child : currentEmployee.children) {
-            if (child.data.equals(firedPerson)) {
-                currentEmployee.removeChild(firedPerson);
-				break;
+			for (int i = 0; i < currentEmployee.children.size(); i++) {
+				GenericTreeNode<Employee> child = currentEmployee.children.get(i);
+				if (child.data.equals(firedPerson)) {
+					currentEmployee.removeChild(firedPerson);
+					nodes.remove(child);
+					return;
 				}
-            }
+			}
 		}
 	}
 
 	@Override
 	public void showOrgChartDepthFirst() {
-		// TODO Auto-generated method stub
+		if (root == null) {
+			return;
+		}
+
+		Stack<GenericTreeNode<Employee>> stack = new Stack<>();
+		ArrayList<Employee> explored = new ArrayList<>();
+
+		stack.push(root);
+
+		while (!stack.isEmpty()) {
+			GenericTreeNode<Employee> current = stack.pop();
+
+			if (!explored.contains(current.data)) {
+				explored.add(current.data);
+			}
+
+			for (int i = current.children.size() - 1; i >= 0; i--) {
+				stack.push(current.children.get(i));
+			}
+		}
+
+		System.out.println("Org Chart (DFS) of the comapny is: ");
+		for (Employee e : explored) {
+			System.out.println("- " + e.toString());
+		}
 
 	}
 
@@ -87,6 +110,8 @@ public class OrgChartImpl implements OrgChart {
 
 			}
 		}
+
+		System.out.println("Org Chart (BFS) of the company is: ");
 		for (Employee e : explored)
 			System.out.println(e.toString());
 	}
