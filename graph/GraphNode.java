@@ -3,6 +3,7 @@ package graph;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.*;
 
 //simplest possible adjacency list implementation of the node
 
@@ -56,5 +57,15 @@ public class GraphNode {
 		paths.put(neighbor, weight);
 		return true;
 	}
-	
+		public void printNeighbors() {
+			System.out.print("Node " + value + " has neighbors: ");
+			if (paths.isEmpty()) {
+				System.out.println("---- no neighbors ----");
+			} else {
+				for (Map.Entry<GraphNode, Integer> entry : paths.entrySet()) {
+					System.out.print(entry.getKey().getValue() + " (weight: " + entry.getValue() + ")  ");
+				}
+				System.out.println();
+			}
+		}
 }
